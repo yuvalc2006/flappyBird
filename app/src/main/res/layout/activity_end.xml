@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background2">
 
     <TextView
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textColor="@android:color/holo_green_light"
+        android:textSize="36sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp" />
 
@@ -17,8 +19,8 @@
         android:id="@+id/highScoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@android:color/holo_green_light"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
         android:layout_below="@id/scoreTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp" />
@@ -29,7 +31,8 @@
         android:layout_height="wrap_content"
         android:text="Restart"
         android:textSize="18sp"
-        android:textColor="@android:color/white"
+        android:textColor="#FFFFFF"
+        android:background="#FFA500"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="48dp"

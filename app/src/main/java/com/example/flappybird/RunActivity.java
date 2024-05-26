@@ -90,7 +90,7 @@ public class RunActivity extends AppCompatActivity {
         score.setText("score: 0");
         score.setTextSize(32); // Set text size
         score.setTypeface(null, Typeface.BOLD);
-        score.setTextColor(Color.parseColor("#FF5722"));
+        score.setTextColor(Color.parseColor("#FFFFFF"));
         score.setShadowLayer(1.5f, -1, 1, Color.BLACK);
 
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(

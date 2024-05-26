@@ -26,7 +26,7 @@ public class Bird extends View {
         super(context);
 
         birdPaint = new Paint();
-        birdPaint.setColor(Color.BLUE);
+        birdPaint.setColor(Color.parseColor("#40E0D0"));
         x = Constants.screenWidth / 8;
         birdSize = Constants.screenWidth / 10;
         y = Constants.screenHeight / 14;
