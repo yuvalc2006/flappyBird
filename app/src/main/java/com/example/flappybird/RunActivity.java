@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import java.lang.Math;
 import java.util.List;
@@ -49,6 +52,8 @@ public class RunActivity extends AppCompatActivity {
     Long highScore;
     Boolean finished = false;
 
+    TextView score;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +86,13 @@ public class RunActivity extends AppCompatActivity {
             }
         });
         container = findViewById(R.id.container);
-        TextView score = new TextView(this);
+        score = new TextView(this);
         score.setText("score: 0");
-        score.setTextSize(24); // Set text size
+        score.setTextSize(32); // Set text size
+        score.setTypeface(null, Typeface.BOLD);
+        score.setTextColor(Color.parseColor("#FF5722"));
+        score.setShadowLayer(1.5f, -1, 1, Color.BLACK);
+
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT
@@ -128,7 +137,8 @@ public class RunActivity extends AppCompatActivity {
                 }
                 curr_score1 += Constants.pipes_gone;
                 curr_score = curr_score1;
-                score.setText("score: " + String.valueOf(curr_score1));
+//                score.setText("score: " + String.valueOf(curr_score1));
+                updateScore(curr_score1);
                 if (finished){
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference();
@@ -148,6 +158,10 @@ public class RunActivity extends AppCompatActivity {
         };
         // Start spawning pipes
         scoreHandler.post(scoreUpdater);
+    }
+
+    private void updateScore(int newScore) {
+        score.setText("score: " + newScore);
     }
 
 
