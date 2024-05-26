@@ -17,7 +17,6 @@ public class Bird extends View {
     static float y;
     static float birdSize;
     static float jumpHeight;
-    static int score;
     static float vy;
     static Handler birdHandler;
     static Runnable birdRunnable;
@@ -31,7 +30,6 @@ public class Bird extends View {
         birdSize = Constants.screenWidth / 10;
         y = Constants.screenHeight / 14;
         jumpHeight = Constants.screenHeight / 8;
-        score = 0;
         vy = 0;
     }
 
