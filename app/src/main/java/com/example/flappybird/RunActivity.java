@@ -179,9 +179,4 @@ public class RunActivity extends AppCompatActivity {
         pipeHandler.removeCallbacks(pipeSpawner);
         Constants.pipes_gone += 1;
     }
-    public void endGame(){
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-        myRef.setValue("hi");
-        System.exit(0);
-    }
 }

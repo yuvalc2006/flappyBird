@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = editTextUsername.getText().toString().trim();
 
-//                myRef.child(username).setValue(0);
-
-                // Check if username is not empty
                 if (!username.isEmpty()) {
                     // Start the game activity and pass the username
                     Intent intent = new Intent(MainActivity.this, RunActivity.class);
@@ -60,7 +57,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-//    public void saveToDataBase(String username, int highScore){
-//    }
 }

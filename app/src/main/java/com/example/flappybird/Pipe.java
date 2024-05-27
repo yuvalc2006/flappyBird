@@ -133,7 +133,4 @@ public class Pipe extends View {
         };
         pipeHandler.post(pipeRunnable);
     }
-    public void stopAnimationLoop(){
-        pipeHandler.removeCallbacks(pipeRunnable);
-    }
 }

@@ -37,7 +37,7 @@ public class Bird extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         // Draw the bird (rectangle) on the canvas
-        canvas.drawRect((float) x, (float) y, (float) (x + birdSize), (float) (y + birdSize), birdPaint);
+        canvas.drawRect(x, y, x + birdSize, y + birdSize, birdPaint);
 
         // Request redraw (animation)
         invalidate();

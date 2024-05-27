@@ -10,13 +10,11 @@ public class Constants {
     static float gravity;
     static float screenHeight;
     static float screenWidth;
-    static int scoreFontSize;
 
     public Constants(Context context) {
         Point screenSize = getScreenSize(context);
         screenHeight = screenSize.y;
         screenWidth = screenSize.x;
-        scoreFontSize = screenSize.y / 10;
         gravity = screenHeight / 4000;
     }
 
