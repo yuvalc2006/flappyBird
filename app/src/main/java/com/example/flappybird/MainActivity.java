@@ -13,23 +13,17 @@ import android.widget.FrameLayout;
 import java.lang.Math;
 import java.util.List;
 import android.os.Handler;
-import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.FrameLayout;
-import android.os.Bundle;
 import android.widget.TextView;
-
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity {
 
+    // Declare UI elements
     private EditText editTextUsername;
     private Button buttonStartGame;
 
@@ -38,20 +32,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize UI elements
         editTextUsername = findViewById(R.id.editUsername);
         buttonStartGame = findViewById(R.id.startButton);
 
+        // Set up button click listener
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get username from EditText
                 String username = editTextUsername.getText().toString().trim();
 
+                // Check if username is not empty
                 if (!username.isEmpty()) {
                     // Start the game activity and pass the username
                     Intent intent = new Intent(MainActivity.this, RunActivity.class);
                     intent.putExtra("username", username);
                     startActivity(intent);
                 } else {
+                    // Show error if username is empty
                     editTextUsername.setError("Please enter a username");
                 }
             }

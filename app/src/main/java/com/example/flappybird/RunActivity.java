@@ -32,14 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
-
 public class RunActivity extends AppCompatActivity {
 
     private FrameLayout container;
@@ -59,36 +51,44 @@ public class RunActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
 
+        // Retrieve the username from the Intent
         username = getIntent().getStringExtra("username");
 
+        // Initialize Firebase
         FirebaseApp.initializeApp(this);
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        // Set a test value in the Firebase database
         DatabaseReference myRef = database.getReference("user");
         myRef.setValue("test");
 
+        // Get the reference to the user's high score in the database
         myRef = database.getReference();
         DatabaseReference readRef = myRef.child("users").child(username);
+
+        // Add a listener to retrieve the user's high score
         readRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Long value = snapshot.getValue(long.class);
                 if (value != null){
                     highScore = value;
-                }
-                else{
+                } else {
                     highScore = (long) -1;
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 highScore = (long) -1;
             }
         });
+
+        // Initialize the UI components
         container = findViewById(R.id.container);
         score = new TextView(this);
         score.setText("score: 0");
-        score.setTextSize(32); // Set text size
+        score.setTextSize(32); // Set the text size
         score.setTypeface(null, Typeface.BOLD);
         score.setTextColor(Color.parseColor("#FFFFFF"));
         score.setShadowLayer(1.5f, -1, 1, Color.BLACK);
@@ -99,24 +99,28 @@ public class RunActivity extends AppCompatActivity {
         );
         container.addView(score, layoutParams);
 
+        // Create a Constants object
         Constants constants = new Constants(this);
 
-        // Create a custom view (Bird) and add it to the layout
+        // Create and add the Bird view to the layout
         Bird bird = new Bird(this);
         container.addView(bird);
 
-        // Set up an animation loop for the bird
+        // Start the animation loop for the bird
         bird.startAnimationLoop(this);
 
+        // Initialize the pipe spawning handler and runnable
         pipeHandler = new Handler();
         pipeSpawner = new Runnable() {
             @Override
             public void run() {
                 spawnPipe(bird);
-                pipeHandler.postDelayed(this, 2500); // 3000 milliseconds (3 seconds) delay
+                pipeHandler.postDelayed(this, 2500); // 2500 milliseconds (2.5 seconds) delay
             }
         };
         pipeHandler.post(pipeSpawner);
+
+        // Initialize the score updating handler and runnable
         scoreHandler = new Handler();
         scoreUpdater = new Runnable() {
             @Override
@@ -137,7 +141,6 @@ public class RunActivity extends AppCompatActivity {
                 }
                 curr_score1 += Constants.pipes_gone;
                 curr_score = curr_score1;
-//                score.setText("score: " + String.valueOf(curr_score1));
                 updateScore(curr_score1);
                 if (finished){
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -153,17 +156,17 @@ public class RunActivity extends AppCompatActivity {
                     startActivity(endGameIntent);
                     System.exit(0);
                 }
-                pipeHandler.postDelayed(this, 1); // 3000 milliseconds (3 seconds) delay
+                pipeHandler.postDelayed(this, 1); // Update score every millisecond
             }
         };
-        // Start spawning pipes
+        // Start the score updater
         scoreHandler.post(scoreUpdater);
     }
 
+    // Update the score display
     private void updateScore(int newScore) {
         score.setText("score: " + newScore);
     }
-
 
     // Method to spawn a new pipe
     private void spawnPipe(Bird bird) {
