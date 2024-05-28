@@ -22,6 +22,21 @@ public class Pipe extends View {
     private Handler pipeHandler;
     private Runnable pipeRunnable;
 
+    public Pipe(Context context, Bird bird) {
+        super(context);
+        x = Constants.screenWidth;
+        pipePaint = new Paint();
+        pipePaint.setColor(Color.GREEN);
+        Random random = new Random();
+
+        // Calculate gap length and position
+        gapLength = random.nextFloat() * Bird.birdSize * 5 + Bird.birdSize * 4; // Adjust gap size
+        gapStart = random.nextFloat() * (Constants.screenHeight - gapLength);
+
+        bottomPipeY = gapStart + gapLength;
+        topPipeY = gapStart;
+    }
+
     public static Paint getPipePaint() {
         return pipePaint;
     }
@@ -90,21 +105,6 @@ public class Pipe extends View {
 
     public void setDidPass(int didPass) {
         this.didPass = didPass;
-    }
-
-    public Pipe(Context context, Bird bird) {
-        super(context);
-        x = Constants.screenWidth;
-        pipePaint = new Paint();
-        pipePaint.setColor(Color.GREEN);
-        Random random = new Random();
-
-        // Calculate gap length and position
-        gapLength = random.nextFloat() * Bird.birdSize * 5 + Bird.birdSize * 4; // Adjust gap size
-        gapStart = random.nextFloat() * (Constants.screenHeight - gapLength);
-
-        bottomPipeY = gapStart + gapLength;
-        topPipeY = gapStart;
     }
 
     @Override
