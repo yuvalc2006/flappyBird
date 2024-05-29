@@ -143,7 +143,7 @@ public class Pipe extends View {
             public void run() {
                 x += vx; // Move the pipe left
                 // Check if bird has passed the pipe
-                if (didPass == 0 && bird.getX() >= x + pipeWidth){
+                if (didPass == 0 && bird.getX() >= x){
                     didPass = 1; // Mark as passed
                 }
                 invalidate(); // Trigger redraw
