@@ -43,7 +43,7 @@ public class RunActivity extends AppCompatActivity {
     int curr_score;  // Current score of the player
     Long highScore;  // High score of the player
     Boolean finished = false;  // Flag to check if the game is finished
-
+    Bird bird;
     TextView score;  // TextView to display the score
 
     @Override
@@ -103,7 +103,7 @@ public class RunActivity extends AppCompatActivity {
         Constants constants = new Constants(this);
 
         // Create and add the Bird view to the layout
-        Bird bird = new Bird(this);
+        bird = new Bird(this);
         container.addView(bird);
 
         // Start the animation loop for the bird
@@ -177,8 +177,24 @@ public class RunActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Stop the pipe spawning when the activity is destroyed
-        pipeHandler.removeCallbacks(pipeSpawner);
-        Constants.pipes_gone += 1;  // Increment pipes_gone count
+        // Stop the pipe spawning and score updating when the activity is destroyed
+        if (pipeHandler != null) {
+            pipeHandler.removeCallbacks(pipeSpawner);
+        }
+        if (scoreHandler != null) {
+            scoreHandler.removeCallbacks(scoreUpdater);
+        }
+
+        // Stop printing all pipes
+        for (int i = 0; i < container.getChildCount(); i++) {
+            View view = container.getChildAt(i);
+            if (view instanceof Pipe) {
+                Pipe pipe = (Pipe) view;
+                pipe.stopAnimationLoop(); // Assuming you have a method to stop the animation loop in the Pipe class
+            }
+        }
+
+        bird.stopAnimationLoop();
     }
+
 }

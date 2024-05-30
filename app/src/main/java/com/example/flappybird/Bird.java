@@ -38,9 +38,6 @@ public class Bird extends View {
         super.onDraw(canvas);
         // Draw the bird as a rectangle on the canvas
         canvas.drawRect(x, y, x + birdSize, y + birdSize, birdPaint);
-
-        // Request a redraw for animation
-        invalidate();
     }
 
     @Override
@@ -81,5 +78,8 @@ public class Bird extends View {
             }
         };
         birdHandler.post(birdRunnable); // Start the animation loop
+    }
+    public void stopAnimationLoop(){
+        birdHandler.removeCallbacks(birdRunnable);
     }
 }
